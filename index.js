@@ -80,8 +80,6 @@ $(document).ready(function () {
           event.preventDefault();
        }, false);
        
-       //clear button functionality
-       clearButton.addEventListener('click', function (mouseEvent) { context.clearRect(0, 0, sigCanvas.width, sigCanvas.height);}, false);
     }
     else {
 
