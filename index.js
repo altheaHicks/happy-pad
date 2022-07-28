@@ -1,5 +1,10 @@
 $(document).ready(function () {
+
+   //call to initialize canvas
     initialize();
+   
+   //call for clear canvas button
+    clearCanvas();
  });
 
  function getPosition(mouseEvent, sigCanvas) {
@@ -18,7 +23,8 @@ $(document).ready(function () {
  function initialize() {
     var sigCanvas = document.getElementById("canvasSignature");
     var context = sigCanvas.getContext("2d");
-    context.strokeStyle = 'Black';
+
+   context.strokeStyle = 'Black';
 
     var is_touch_device = 'ontouchstart' in document.documentElement;
 
@@ -69,7 +75,10 @@ $(document).ready(function () {
 
        sigCanvas.addEventListener('touchmove', function (event) {
           event.preventDefault();
-       }, false); 
+       }, false);
+       
+       //clear button functionality
+       clearButton.addEventListener('click', function (mouseEvent) { context.clearRect(0, 0, sigCanvas.width, sigCanvas.height);}, false);
     }
     else {
 
@@ -107,3 +116,15 @@ $(document).ready(function () {
                 .unbind("mouseup")
                 .unbind("mouseout");
  }
+
+ function clearCanvas(){
+   var sigCanvas = document.getElementById("canvasSignature");
+   var context = sigCanvas.getContext("2d");
+
+   document.getElementById('clear').addEventListener('click', function () {
+      context.clearRect(0, 0, canvasSignature.width, canvasSignature.height);
+  }, false);
+
+
+   }
+
