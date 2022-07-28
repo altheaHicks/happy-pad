@@ -135,7 +135,7 @@ function fillCanvas(){
    var sigCanvas = document.getElementById("canvasSignature");
    var context = sigCanvas.getContext("2d");
 
-   context.fillStyle = 'rgba(0, 0, 200, 0.5)';
+   context.fillStyle = 'rgb(120, 0, 200)';
    
    document.getElementById('fill').addEventListener('click', function () {
       context.fillRect(0, 0, canvasSignature.width, canvasSignature.height);
