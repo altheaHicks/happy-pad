@@ -1,10 +1,13 @@
 $(document).ready(function () {
 
    //call to initialize canvas
-    initialize();
+   initialize();
    
    //call for clear canvas button
-    clearCanvas();
+   clearCanvas();
+
+   //call for fill canvas button
+   fillCanvas();
  });
 
  function getPosition(mouseEvent, sigCanvas) {
@@ -127,4 +130,15 @@ $(document).ready(function () {
 
 
    }
+
+function fillCanvas(){
+   var sigCanvas = document.getElementById("canvasSignature");
+   var context = sigCanvas.getContext("2d");
+
+   context.fillStyle = 'rgba(0, 0, 200, 0.5)';
+   
+   document.getElementById('fill').addEventListener('click', function () {
+      context.fillRect(0, 0, canvasSignature.width, canvasSignature.height);
+  }, false);
+}
 
