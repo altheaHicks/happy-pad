@@ -96,4 +96,11 @@ function clear_click(clicked){
 }
 
 
+//fill button clicked
+fill_click();
+function fill_click(clicked){
+	ctx.fillStyle = 'rgb(120, 0, 200)';
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
  
