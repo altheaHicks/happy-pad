@@ -1,167 +1,76 @@
-$(document).ready(function () {
+// wait for the content of the window element
+// to load, then performs the operations.
+// This is considered best practice.
+window.addEventListener('load', ()=>{
+		
+	resize(); // Resizes the canvas once the window loads
+	document.addEventListener('mousedown', startPainting);
+	document.addEventListener('mouseup', stopPainting);
+	document.addEventListener('mousemove', sketch);
+	window.addEventListener('resize', resize);
+});
+	
+const canvas = document.querySelector('#canvas');
 
+// Context for the canvas for 2 dimensional operations
+const ctx = canvas.getContext('2d');
+	
+// Resizes the canvas to the available size of the window.
+function resize(){
+ctx.canvas.width = window.innerWidth;
+ctx.canvas.height = window.innerHeight;
+}
+	
+// Stores the initial position of the cursor
+let coord = {x:0 , y:0};
 
-   //call to initialize canvas
-   initialize();
-   
-   //call for clear canvas button
-   clearCanvas();
-
-   //call for fill canvas button
-   fillCanvas();
-
-   //call for download image button
-   downloadImage();
-
-
- });
-
- function getPosition(mouseEvent, sigCanvas) {
-    var x, y;
-    if (mouseEvent.pageX != undefined && mouseEvent.pageY != undefined) {
-       x = mouseEvent.pageX;
-       y = mouseEvent.pageY;
-    } else {
-       x = mouseEvent.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-       y = mouseEvent.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-    }
-
-    return { X: x - sigCanvas.offsetLeft, Y: y - sigCanvas.offsetTop };
- }
-
- function initialize() {
-
-    var sigCanvas = document.getElementById("canvasSignature");
-    var context = sigCanvas.getContext("2d");
-
-      context.strokeStyle = 'Black';
-
-    var is_touch_device = 'ontouchstart' in document.documentElement;
-
-    if (is_touch_device) {
-       var drawer = {
-          isDrawing: false,
-          touchstart: function (coors) {
-             context.beginPath();
-             context.moveTo(coors.x, coors.y);
-             this.isDrawing = true;
-          },
-          touchmove: function (coors) {
-             if (this.isDrawing) {
-                context.lineTo(coors.x, coors.y);
-                context.stroke();
-             }
-          },
-          touchend: function (coors) {
-             if (this.isDrawing) {
-                this.touchmove(coors);
-                this.isDrawing = false;
-             }
-          }
-       };
-
-       function draw(event) {
-          var coors = {
-             x: event.targetTouches[0].pageX,
-             y: event.targetTouches[0].pageY
-          };
-
-          var obj = sigCanvas;
-
-          if (obj.offsetParent) {
-             do {
-                coors.x -= obj.offsetLeft;
-                coors.y -= obj.offsetTop;
-             }
-
-             while ((obj = obj.offsetParent) != null);
-          }
-
-          drawer[event.type](coors);
-       }
-       sigCanvas.addEventListener('touchstart', draw, false);
-       sigCanvas.addEventListener('touchmove', draw, false);
-       sigCanvas.addEventListener('touchend', draw, false);
-
-       sigCanvas.addEventListener('touchmove', function (event) {
-          event.preventDefault();
-       }, false);
-       
-    }
-    else {
-
-       $("#canvasSignature").mousedown(function (mouseEvent) {
-          var position = getPosition(mouseEvent, sigCanvas);
-
-          context.moveTo(position.X, position.Y);
-          context.beginPath();
-
-          $(this).mousemove(function (mouseEvent) {
-             drawLine(mouseEvent, sigCanvas, context);
-          }).mouseup(function (mouseEvent) {
-             finishDrawing(mouseEvent, sigCanvas, context);
-          }).mouseout(function (mouseEvent) {
-             finishDrawing(mouseEvent, sigCanvas, context);
-          });
-       });
-
-    }
-
+// This is the flag that we are going to use to
+// trigger drawing
+let paint = false;
+	
+// Updates the coordianates of the cursor when
+// an event e is triggered to the coordinates where
+// the said event is triggered.
+function getPosition(event){
+coord.x = event.clientX - canvas.offsetLeft;
+coord.y = event.clientY - canvas.offsetTop;
 }
 
-
-
-
- function drawLine(mouseEvent, sigCanvas, context) {
-
-    var position = getPosition(mouseEvent, sigCanvas);
-
-    context.lineTo(position.X, position.Y);
-    context.stroke();
- }
-
- function finishDrawing(mouseEvent, sigCanvas, context) {
-    drawLine(mouseEvent, sigCanvas, context);
-
-    context.closePath();
-    $(sigCanvas).unbind("mousemove")
-                .unbind("mouseup")
-                .unbind("mouseout");
- }
-
- function clearCanvas(){
-   var sigCanvas = document.getElementById("canvasSignature");
-   var context = sigCanvas.getContext("2d");
-
-   document.getElementById('clear').addEventListener('click', function () {
-      context.clearRect(0, 0, canvasSignature.width, canvasSignature.height);
-  }, false);
-
-
-   }
-
-function fillCanvas(){
-   var sigCanvas = document.getElementById("canvasSignature");
-   var context = sigCanvas.getContext("2d");
-
-   context.fillStyle = 'rgb(120, 0, 200)';
-   
-   document.getElementById('fill').addEventListener('click', function () {
-      context.fillRect(0, 0, canvasSignature.width, canvasSignature.height);
-  }, false);
+// The following functions toggle the flag to start
+// and stop drawing
+function startPainting(event){
+paint = true;
+getPosition(event);
 }
-
-
-
-function downloadImage(){
-   var sigCanvas = document.getElementById("canvasSignature");
-   var anchor = document.createElement("a");
-   anchor.href = sigCanvas.toDataURL();
-   anchor.download = "IMAGE.PNG";
-
-   document.getElementById('download').addEventListener('click', function (){
-      anchor.click();
-      anchor.remove();
-   }, false);
+function stopPainting(){
+paint = false;
 }
+	
+function sketch(event){
+if (!paint) return;
+ctx.beginPath();
+	
+ctx.lineWidth = 2;
 
+// Sets the end of the lines drawn
+// to a round shape.
+ctx.lineCap = 'round';
+	
+ctx.strokeStyle = 'black';
+	
+// The cursor to start drawing
+// moves to this coordinate
+ctx.moveTo(coord.x, coord.y);
+
+// The position of the cursor
+// gets updated as we move the
+// mouse around.
+getPosition(event);
+
+// A line is traced from start
+// coordinate to this coordinate
+ctx.lineTo(coord.x , coord.y);
+	
+// Draws the line.
+ctx.stroke();
+}

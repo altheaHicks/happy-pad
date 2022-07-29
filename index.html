@@ -1,25 +1,33 @@
-<html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<title>SketchPad in HTML5 and Javascript</title>
- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
- <script src="index.js"></script>
-   
+	<meta charset="UTF-8">
+	<meta name="viewport" content=
+			"width=device-width, initial-scale=1.0">
+	
+	<title>
+		Draw with the mouse in a HTML5 canvas
+	</title>
+	
+	<!-- <style>
+		* {
+			overflow: hidden;
+		}
+		body {
+			text-align: center;
+		}
+		h1 {
+			color: green;
+		}
+	</style> -->
 </head>
- 
+
 <body>
-   <h1>Happy Pad</h1>
- 
-   <div id="canvasDiv">
-      <canvas id="canvasSignature" width="1000px" height="500px" style="border:2px solid #000000;"></canvas>
-
-   </div>
-      <input type="button" id="clear" value="clear">
-      <input type="button" id="fill"  value="fill">
-      <input type="button" id="download" value="download">
-
-
-   </div>
+	<h1>Happy Pad</h1>
+	<b>Draw what makes you happy</b>
+	<hr>
+	<canvas id="canvas"></canvas>
+	<script src="index.js"></script>
 </body>
+
 </html>
