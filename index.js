@@ -14,11 +14,14 @@ const canvas = document.querySelector('#canvas');
 
 // Context for the canvas for 2 dimensional operations
 const ctx = canvas.getContext('2d');
-	
+
+
+
+
 // Resizes the canvas to the available size of the window.
 function resize(){
-ctx.canvas.width = window.innerWidth;
-ctx.canvas.height = window.innerHeight;
+ctx.canvas.width = 1000;
+ctx.canvas.height = 500;
 }
 	
 // Stores the initial position of the cursor
@@ -28,6 +31,9 @@ let coord = {x:0 , y:0};
 // trigger drawing
 let paint = false;
 	
+
+
+
 // Updates the coordianates of the cursor when
 // an event e is triggered to the coordinates where
 // the said event is triggered.
@@ -35,6 +41,9 @@ function getPosition(event){
 coord.x = event.clientX - canvas.offsetLeft;
 coord.y = event.clientY - canvas.offsetTop;
 }
+
+
+
 
 // The following functions toggle the flag to start
 // and stop drawing
@@ -45,7 +54,10 @@ getPosition(event);
 function stopPainting(){
 paint = false;
 }
-	
+
+
+
+
 function sketch(event){
 if (!paint) return;
 ctx.beginPath();
@@ -74,3 +86,14 @@ ctx.lineTo(coord.x , coord.y);
 // Draws the line.
 ctx.stroke();
 }
+
+
+
+//clear button clicked
+clear_click();
+function clear_click(clicked){
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+
+ 
