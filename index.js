@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+
    //call to initialize canvas
    initialize();
    
@@ -8,6 +9,11 @@ $(document).ready(function () {
 
    //call for fill canvas button
    fillCanvas();
+
+   //call for download image button
+   downloadImage();
+
+
  });
 
  function getPosition(mouseEvent, sigCanvas) {
@@ -24,10 +30,11 @@ $(document).ready(function () {
  }
 
  function initialize() {
+
     var sigCanvas = document.getElementById("canvasSignature");
     var context = sigCanvas.getContext("2d");
 
-   context.strokeStyle = 'Black';
+      context.strokeStyle = 'Black';
 
     var is_touch_device = 'ontouchstart' in document.documentElement;
 
@@ -99,7 +106,11 @@ $(document).ready(function () {
        });
 
     }
- }
+
+}
+
+
+
 
  function drawLine(mouseEvent, sigCanvas, context) {
 
@@ -138,5 +149,19 @@ function fillCanvas(){
    document.getElementById('fill').addEventListener('click', function () {
       context.fillRect(0, 0, canvasSignature.width, canvasSignature.height);
   }, false);
+}
+
+
+
+function downloadImage(){
+   var sigCanvas = document.getElementById("canvasSignature");
+   var anchor = document.createElement("a");
+   anchor.href = sigCanvas.toDataURL();
+   anchor.download = "IMAGE.PNG";
+
+   document.getElementById('download').addEventListener('click', function (){
+      anchor.click();
+      anchor.remove();
+   }, false);
 }
 
