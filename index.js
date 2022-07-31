@@ -31,7 +31,9 @@ let coord = {x:0 , y:0};
 // trigger drawing
 let paint = false;
 	
-
+//variables for marker and pencil status
+let markerClicked = false;
+let pencilClicked = true;
 
 
 // Updates the coordianates of the cursor when
@@ -61,8 +63,14 @@ paint = false;
 function sketch(event){
 if (!paint) return;
 ctx.beginPath();
-	
-ctx.lineWidth = 2;
+
+//if statement to test if marker or pencil was clicked
+if(markerClicked){
+ctx.lineWidth = 4;
+}
+else{
+	ctx.lineWidth = 1;
+}
 
 // Sets the end of the lines drawn
 // to a round shape.
@@ -86,18 +94,30 @@ ctx.lineTo(coord.x , coord.y);
 // Draws the line.
 ctx.stroke();
 }
+//pencil clicked
 
+function pencil_click(clicked){
+	markerClicked = false;
+	pencilClicked = true;
+}
+
+//marker clicked
+
+function marker_click(clicked){
+	pencilClicked = false;
+	markerClicked = true;
+}
 
 
 //clear button clicked
-clear_click();
+
 function clear_click(clicked){
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 
 //fill button clicked
-fill_click();
+
 function fill_click(clicked){
 	ctx.fillStyle = 'rgb(120, 0, 200)';
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
