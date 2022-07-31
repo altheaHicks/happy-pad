@@ -103,4 +103,22 @@ function fill_click(clicked){
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
+//download functionality
+const btnDownload = document.querySelector("#btnDownload");
+
+btnDownload.addEventListener("click", function(){
+	//for i/e or edge
+	if (window.navigator.msSaveBlob){
+		window.navigator.msSaveBlob(canvas.msToBlob(), "image.png");
+		}
+	//other browsers
+	else {
+		const a = document.createElement("a");
+		document.body.appendChild(a);
+		a.href = canvas.toDataURL();
+		a.download = "image.png";
+		a.click();
+		document.body.removeChild(a);
+	}
+});
  
