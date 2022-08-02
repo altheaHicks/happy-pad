@@ -9,36 +9,45 @@
 		Draw with the mouse in a HTML5 canvas
 	</title>
 	
-	<!-- <style>
-		* {
-			overflow: hidden;
-		}
-		body {
-			text-align: center;
-		}
-		h1 {
-			color: green;
-		}
-	</style> -->
+	<link rel="stylesheet" href="./style.css"/>
+
 </head>
 
 <body>
 	<h1>Happy Pad</h1>
-	<b>Draw what makes you happy</b>
-	<hr>
+	<p>Draw what makes you happy</p>
+	<br>
+
 	<canvas id="canvas" style="border:2px solid #000000;">
 	</canvas>
-	<button id="clear" onClick="clear_click(this.id)">
-		clear
-	</button>
-	<button id="fill" onClick="fill_click(this.id)">
-		fill
-	</button>
 
-	<button type="button" id="btnDownload">download</button>
+	<div class="all_buttons">
 
-	<button id="pencil" onClick="pencil_click(this.id)">pencil</button>
-	<button id="marker" onClick="marker_click(this.id)">marker</button>
+		<button id="clear" onClick="clear_click(this.id)">
+			clear
+		</button>
+
+
+		<button id="fill" onClick="fill_click(this.id)">
+			fill
+		</button>
+
+
+		<button type="button" id="btnDownload">
+			download
+		</button>
+
+
+		<button id="pencil" onClick="pencil_click(this.id)">
+			pencil
+		</button>
+
+
+		<button id="marker" onClick="marker_click(this.id)">
+			marker
+		</button>
+
+	</div>
 
 
 	<script src="index.js"></script>
