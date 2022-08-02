@@ -1,11 +1,14 @@
+body {
+    background-color: rgb(224, 237, 159);
+}
 h1{
-    color: blue;
+    color: darkblue;
     font-size:42px;
     text-align:center;
 }
 
 p{
-    color: orange;
+    color: darkred;
     font-size: 25px;
     text-align: center;
     font-weight: bolder;
@@ -18,27 +21,59 @@ canvas{
     margin-right: auto;
     display: block;
     width: 800px;
+    background-color: white;
 }
 
 #clear{
-    color: green;
+    color: purple;
+    margin-right: 15px;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
 }
 #fill{
     color: blue;
-}
-#btnDownload{
-    color:purple;
+    margin-right: 15px;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
 }
 #pencil{
     color:black;
+    margin-right: 15px;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
 }
 #marker{
     color:black;
     font-weight:bolder;
+    margin-right: 15px;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+#btnDownload{
+    color: green;
+    margin-right: 15px;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
 }
 
 .all_buttons{
-    padding-top: 10px;
+    padding-top: 15px;
     padding-bottom: 0px;
     text-align: center;
+    
 }

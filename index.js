@@ -59,14 +59,13 @@ paint = false;
 
 
 
-
 function sketch(event){
 if (!paint) return;
 ctx.beginPath();
 
 //if statement to test if marker or pencil was clicked
 if(markerClicked){
-ctx.lineWidth = 4;
+ctx.lineWidth = 6;
 }
 else{
 	ctx.lineWidth = 1;
@@ -93,6 +92,8 @@ ctx.lineTo(coord.x , coord.y);
 	
 // Draws the line.
 ctx.stroke();
+ctx.closePath();
+
 }
 //pencil clicked
 
@@ -121,6 +122,9 @@ function clear_click(clicked){
 function fill_click(clicked){
 	ctx.fillStyle = 'rgb(120, 0, 200)';
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+	ctx.fillStyle = 'rgb(120, 0, 200)';
+	ctx.fill();
 }
 
 //download functionality
